@@ -1,0 +1,21 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-07-04 07:15:54 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 07:16:21 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 13:01:10 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 13:53:19 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 13:54:01 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 13:54:15 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 13:54:21 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 13:54:26 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 13:54:42 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 433
+ERROR - 2020-07-04 19:58:59 --> Severity: Warning --> array_map() expects parameter 1 to be a valid callback, function 'deleteDir' not found or invalid function name C:\wamp64\www\lms\application\controllers\Student.php 1484
+ERROR - 2020-07-04 19:59:55 --> Severity: Warning --> unlink(uploads/news_images/4da8f80612.jpg): No such file or directory C:\wamp64\www\lms\application\models\Crud_model.php 27
+ERROR - 2020-07-04 20:00:29 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 432
+ERROR - 2020-07-04 20:31:43 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\admin\subject_dashboard.php 432
+ERROR - 2020-07-04 20:32:30 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 20:33:25 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 20:33:39 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 20:33:55 --> Severity: Warning --> Use of undefined constant desc - assumed 'desc' (this will throw an Error in a future version of PHP) C:\wamp64\www\lms\application\views\backend\student\subject_dashboard.php 434
+ERROR - 2020-07-04 20:34:14 --> 404 Page Not Found: Style/cms
+ERROR - 2020-07-04 20:35:21 --> Severity: Warning --> array_map() expects parameter 1 to be a valid callback, function 'deleteDir' not found or invalid function name C:\wamp64\www\lms\application\controllers\Student.php 1484

@@ -1,0 +1,251 @@
+<?php
+  $running_year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+  $online_exam_details = $this->db->get_where('online_exam', array('online_exam_id' => $online_exam_id))->row_array();
+  $class_id = $online_exam_details['class_id'];
+  $section_id = $online_exam_details['section_id'];
+  $subject_id = $online_exam_details['subject_id'];
+  $exam_id = $online_exam_details['semester_id'];
+  $department_id = $this->crud_model->get_department($subject_id);
+
+  if($department_id == 4)
+  {
+
+    if ($exam_id == 5) {
+
+      // $students_array = $this->db->query("SELECT t2.`student_id`, t1.`class_id`, t1.`section_id`, t2.`last_name`, t4.`Id` FROM enroll t1 LEFT JOIN student t2 ON t1.`student_id` = t2.`student_id` LEFT JOIN subject t3 ON t1.`class_id` = t3.`class_id` AND t1.`section_id` = t3.`section_id` LEFT JOIN tbl_stud_subject_exclusion t4 ON t1.`student_id` = t4.`student_id` AND t4.`subject_id` = t3.`subject_id` WHERE t1.`class_id` = '$class_id' AND t1.`section_id` = '$section_id' AND t3.`subject_id` = '$subject_id' AND t1.`year` = '$running_year' AND ISNULL(t4.`Id`) UNION SELECT t1.`student_id`, t3.`class_id`, t3.`section_id`, t2.`last_name`, t1.`Id` FROM tbl_students_subject t1 LEFT JOIN student t2 ON t1.`student_id` = t2.`student_id` LEFT JOIN enroll t3 ON t2.`student_id` = t3.`student_id` WHERE t1.`class_id` = '$class_id' AND t1.`section_id` = '$section_id' AND t1.`subject_id` = '$subject_id' AND t1.`year` = '$running_year' ORDER BY last_name ASC");
+
+      $students_array = $this->db->query("SELECT * FROM student_list_elem_hs WHERE class_id = '$class_id' AND section_id = '$section_id' AND subject_id = '$subject_id' AND status = '1' AND year = '$running_year'");
+
+    }
+    else
+    {
+
+      // $students_array = $this->db->query("SELECT t1.`student_id`, t3.`class_id`, t3.`section_id`, t2.`last_name`, t1.`Id` FROM tbl_students_subject t1 LEFT JOIN student t2 ON t1.`student_id` = t2.`student_id` LEFT JOIN enroll t3 ON t2.`student_id` = t3.`student_id` WHERE t1.`class_id` = '$class_id' AND t1.`section_id` = '$section_id' AND t1.`subject_id` = '$subject_id' AND t1.`year` = '$running_year' ORDER BY last_name ASC");
+
+      $students_array = $this->db->query("SELECT * FROM student_list_coll WHERE subject_id = '$subject_id' AND status = '1' AND year = '$running_year'");
+
+    }
+    
+  }
+  else
+  {
+
+    // $students_array = $this->db->query("SELECT t2.`student_id`, t1.`class_id`, t1.`section_id`, t2.`last_name`, t4.`Id` FROM enroll t1 LEFT JOIN student t2 ON t1.`student_id` = t2.`student_id` LEFT JOIN subject t3 ON t1.`class_id` = t3.`class_id` AND t1.`section_id` = t3.`section_id` LEFT JOIN tbl_stud_subject_exclusion t4 ON t1.`student_id` = t4.`student_id` AND t4.`subject_id` = t3.`subject_id` WHERE t1.`class_id` = '$class_id' AND t1.`section_id` = '$section_id' AND t3.`subject_id` = '$subject_id' AND t1.`year` = '$running_year' AND ISNULL(t4.`Id`) UNION SELECT t1.`student_id`, t3.`class_id`, t3.`section_id`, t2.`last_name`, t1.`Id` FROM tbl_students_subject t1 LEFT JOIN student t2 ON t1.`student_id` = t2.`student_id` LEFT JOIN enroll t3 ON t2.`student_id` = t3.`student_id` WHERE t1.`class_id` = '$class_id' AND t1.`section_id` = '$section_id' AND t1.`subject_id` = '$subject_id' AND t1.`year` = '$running_year' ORDER BY last_name ASC");
+
+    $students_array = $this->db->query("SELECT * FROM student_list_elem_hs WHERE class_id = '$class_id' AND section_id = '$section_id' AND subject_id = '$subject_id' AND status = '1' AND year = '$running_year'");
+
+  }
+
+  $subject_info = $this->crud_model->get_subject_info($online_exam_details['subject_id']);
+?>
+<div class="content-w">
+   <div class="conty">
+      <?php include 'fancy.php';?>
+      <div class="header-spacer"></div>
+      <div class="os-tabs-w menu-shad">
+         <div class="os-tabs-controls">
+            <ul class="navs navs-tabs upper">
+               <li class="navs-item">
+                  <a class="navs-links" href="<?php echo base_url();?>admin/examroom/<?php echo $online_exam_id;?>/"><i class="os-icon picons-thin-icon-thin-0016_bookmarks_reading_book"></i><span><?php echo get_phrase('exam_details');?></span></a>
+               </li>
+               <li class="navs-item">
+                  <a class="navs-links active" href="<?php echo base_url();?>admin/manage_examiner/<?php echo $online_exam_id;?>/"><i class="fa fa-users fa-2x"></i><span><?php echo get_phrase('Manage_allowed_examiners');?></span></a>
+               </li>
+               <li class="navs-item">
+                  <a class="navs-links" href="<?php echo base_url();?>admin/exam_results/<?php echo $online_exam_id;?>/"><i class="os-icon picons-thin-icon-thin-0100_to_do_list_reminder_done"></i><span><?php echo get_phrase('results');?></span></a>
+               </li>
+               <li class="navs-item">
+                  <a class="navs-links" href="<?php echo base_url();?>admin/exam_edit/<?php echo $online_exam_id;?>/"><i class="os-icon picons-thin-icon-thin-0001_compose_write_pencil_new"></i><span><?php echo get_phrase('edit');?></span></a>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="content-i">
+         <div class="content-box">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="pipeline white lined-primary">
+                     <div class="pipeline-header">
+                        <h4>
+                           <span class="fa fa-users"></span> <?php echo get_phrase('Manage_allowed_examiners for');?> <?php echo $online_exam_details['title']; ?>
+                        </h4>
+                     </div>
+                     <div class="row">
+                        <div class="col-sm-8">
+                           <div class="form-group">
+                              <input class="form-control" style="height: 17px;" id="filter" placeholder="<?php echo get_phrase('search_students');?>..." type="text" name="search_key">
+                           </div>
+                        </div>
+                        <div class="col-sm-4">
+                           <button class="btn btn-danger" id="btn_retake"><span class="fa fa-check"></span> Update</button>
+                        </div>
+                     </div>
+                     <div class="table-responsive">
+                        <table class="table table-lightborder table-striped table-hover">
+                           <thead class="table-dark">
+                              <tr>
+                                 <th>
+                                    <div class="form-inline">
+                                       <input type="checkbox" class="form-control" name="chk_subs" id="chk_subs" title="Check All">
+                                    </div>
+                                 </th>
+                                 <th><?php echo get_phrase('student');?></th>
+                                 <th><?php echo get_phrase('Contact');?></th>
+                                 <th><?php echo get_phrase('address');?></th>
+                                 <th><?php echo get_phrase('member_since');?></th>
+                              </tr>
+                           </thead>
+                           <tbody id="results">
+                              <?php $counter = 0; foreach ($students_array->result_array() as $row): $counter++;?>
+                              <tr>
+                                 <?php   
+                                    $query = $this->db->get_where('online_exam_result', array('online_exam_id' => $online_exam_id, 'student_id' => $row['student_id']));
+                                    $student_id = $row['student_id'];
+                                    ?>
+                                 <td>
+                                    <?php 
+                                       $chk_student = $this->db->query("SELECT * from tbl_allowed_examiners where student_id = '$student_id' and online_exam_id = '$online_exam_id'")->num_rows();
+                                       
+                                       if($chk_student > 0){ ?>
+                                    <input type="checkbox" checked="" onclick="count_check_subs();" name="id[]" class="select_subs" value="<?php echo $row['student_id'] ?>"/>
+                                    <?php }else{ ?>
+                                    <input type="checkbox" onclick="count_check_subs();" name="id[]" class="select_subs" value="<?php echo $row['student_id'] ?>"/>
+                                    <?php } ?>
+                                 </td>
+                                 <td>
+                                    <?php 
+                                       $student_details = $this->crud_model->get_student_info_by_id($row['student_id']); 
+                                       echo $counter.'.) &nbsp;'.$student_details['last_name'].", ".$student_details['first_name']; ?>
+                                 </td>
+                                 <td>
+                                    <?php echo $student_details['phone'];?>
+                                 </td>
+                                 <td>
+                                    <?php echo $student_details['address'];?>
+                                 </td>
+                                 <td>
+                                    <?php echo $student_details['since'];?>
+                                 </td>
+                              </tr>
+                              <?php endforeach; ?>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+   $(document).ready(function() {
+   
+    $("#chk_subs").change(function() {
+        if (this.checked) {
+            $(".select_subs").each(function() {
+                this.checked=true;
+            });
+        } else {
+            $(".select_subs").each(function() {
+                this.checked=false;
+            });
+        }
+    });
+   
+    $(".select_subs").click(function () {
+        if ($(this).is(":checked")) {
+            var isAllChecked = 0;
+   
+            $(".select_subs").each(function() {
+                if (!this.checked)
+                    isAllChecked = 1;
+            });
+   
+            if (isAllChecked == 0) {
+                $("#chk_subs").prop("checked", true);
+            }     
+        }
+        else {
+            $("#chk_subs").prop("checked", false);
+        }
+    });
+   });
+   
+   
+   $(document).ready(function(){
+   
+    $('#btn_retake').click(function(){
+   
+      swal({
+        title: "Are you sure?",
+        text: "You want to allow selected data to take exam?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e65252",
+        confirmButtonText: "Yes",
+        closeOnConfirm: true
+      },
+      function(isConfirm){
+   
+        if(isConfirm) 
+        {  
+   
+          var id = [];
+          var user_type = [];
+          // var user_type = [];
+          $(':checkbox:checked').each(function(i){
+              id[i] = $(this).val();
+              //user_type[i] = $(this).attr("id");
+          });
+   
+          $.ajax({
+            url:'<?php echo base_url();?>admin/save_update_examiner/<?php echo $online_exam_id; ?>',
+            method:'POST',
+            data:{id:id},
+            cache:false,
+            success:function(data)
+            {
+   
+            if(data == ''){
+   
+               swal("LMS", "Selected Data successfully updated.", "success");
+               window.location.href = '<?php echo base_url();?>admin/manage_examiner/<?php echo $online_exam_id; ?>';
+            }else{
+              swal("LMS", "Error on updating data", "info");
+            }
+   
+            }
+   
+          });
+          
+   
+        }else{
+   
+        }
+   
+      });
+   
+    });
+   
+   });
+   
+   window.onload=function(){      
+   $("#filter").keyup(function() {
+   
+     var filter = $(this).val(),
+       count = 0;
+   
+     $('#results tr').each(function() {
+   
+       if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+         $(this).hide();
+   
+       } else {
+         $(this).show();
+         count++;
+       }
+     });
+   });
+   }
+</script>
